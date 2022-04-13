@@ -19,15 +19,22 @@ async function login(req, res, next) {
             if (err) { return next(err) }
             if (user) {
                 const token = await jwtmiddle.jwtCreate(user)
+                // 유저마다 session이 다르기때문에 저장
                 req.session.salt = user.salt
 
+                // 토큰 값을 암호화
+                // 양방향 암호화
                 const token_encryption = await MiddleCrypto.cipher(token,req.session.salt)
                 console.log(token_encryption)
 
+                // 다른코드에서 사용할 때
+                // 암호화한 토큰 복호화한것
+                // 확인을 위해 기입한 코드
                 const decode = await MiddleCrypto.decipher(token_encryption, req.session.salt)
                 console.log(decode)
                 
                 console.log(req.session)
+
                 res.json({ "isAuth": true, "Message": "success", "token": token_encryption })
             } else {
                 res.json({ "Message": "fail" })
