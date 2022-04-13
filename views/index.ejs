@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <% if(displayName) {%>
+    <h2><%= displayName %></h2>
+    <%}%>
+    <a href="/api/auth/login">login</a>
+    <a href="/api/auth/logout">logout</a>
+    
+    <p> <%= count %></p>
+  </body>
+</html>
