@@ -31,7 +31,8 @@ async function login(req, res, next) {
                 // 암호화한 토큰 복호화한것
                 // 확인을 위해 기입한 코드
                 const decode = await MiddleCrypto.decipher(token_encryption, req.session.salt)
-                console.log(decode)
+                const check_token = await jwtmiddle.jwtCerti(decode)
+                console.log(check_token)
                 
                 console.log(req.session)
 
